@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# 📋 Controle de Hábitos Diários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicativo web desenvolvido como **Atividade 2** da disciplina de Laboratório de Desenvolvimento Web — FATEC.
 
-Currently, two official plugins are available:
+## 🎯 Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Desenvolver um aplicativo de controle de hábitos diários utilizando **React + Redux Toolkit + TypeScript**, com interface construída com **Material UI**.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Funcionalidades
 
-## Expanding the ESLint configuration
+- ➕ **Adicionar** novos hábitos (nome obrigatório, categoria opcional)
+- ✏️ **Editar** nome e categoria de hábitos existentes
+- ✅ **Marcar** hábitos como concluídos
+- 🗑️ **Excluir** hábitos individualmente
+- 🔍 **Filtrar** hábitos por categoria
+- 🧹 **Limpar** todos os hábitos concluídos de uma vez
+- 📊 **Progresso** do dia exibido em tempo real
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologias
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Tecnologia | Versão |
+|---|---|
+| React | 19 |
+| TypeScript | 5 |
+| Redux Toolkit | 2 |
+| React Redux | 9 |
+| Material UI | 7 |
+| Vite | 7 |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/
+│   ├── FilterBar.tsx     # Filtros por categoria + botão limpar concluídos
+│   ├── HabitForm.tsx     # Formulário para adicionar hábito
+│   ├── HabitItem.tsx     # Card individual com edição inline
+│   ├── HabitList.tsx     # Lista filtrada dos hábitos
+│   └── StatsBar.tsx      # Barra de progresso do dia
+├── store/
+│   ├── habitSlice.ts     # Slice Redux com actions e selectors
+│   └── index.ts          # Configuração da store
+├── types/
+│   └── habit.ts          # Interfaces e tipos TypeScript
+├── hooks.ts              # Hooks tipados (useAppDispatch, useAppSelector)
+├── App.tsx               # Componente raiz com tema e layout
+└── main.tsx              # Entry point com Provider do Redux
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔧 Redux — Estrutura do Estado
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```typescript
+interface Habit {
+  id: string;
+  name: string;
+  category: 'saúde' | 'estudo' | 'lazer' | 'produtividade' | 'outros';
+  completed: boolean;
+  createdAt: string;
+}
 ```
+
+**Actions disponíveis:**
+- `addHabit` — adiciona novo hábito
+- `editHabit` — edita nome e categoria
+- `deleteHabit` — remove hábito
+- `toggleHabit` — alterna concluído/pendente
+- `clearCompleted` — remove todos os concluídos
+- `setFilter` — filtra por categoria
+
+---
+
+## 🚀 Como rodar
+
+```bash
+# Instalar dependências
+npm install
+
+# Rodar em desenvolvimento
+npm run dev
+
+# Build de produção
+npm run build
+```
+
+Acesse em: `http://localhost:5173`
+
+---
+
+## 👨‍🎓 Informações Acadêmicas
+
+- **Curso:** Tecnologia em Análise e Desenvolvimento de Sistemas
+- **Disciplina:** Laboratório de Desenvolvimento Web
+- **Professor:** Neymar
+- **Instituição:** FATEC
